@@ -1,21 +1,23 @@
-import { ADD_100MS, CLEAR } from '../actions';
+import { UPDATE, CLEAR } from '../actions';
 
 const initialState = {
   milliseconds: 0,
+  initial: Date.now()
 }
 
 export default function chronometer(state = initialState, action) {
   switch (action.type) {
-    case ADD_100MS:
+    case UPDATE:
       return {
         ...state,
-        milliseconds: state.milliseconds += 10,
+        milliseconds: Date.now() - state.initial,
       };
     case CLEAR:
       return {
         ...state,
         intervalID: clearInterval(state.intervalID),
-        milliseconds: 0
+        initial: Date.now(),
+        milliseconds: 0,
       };
     default:
       return {

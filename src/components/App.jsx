@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { add_100ms, clear } from '../actions';
+import { update, clear } from '../actions';
 
 class App extends Component {
   constructor(props) {
@@ -23,10 +23,10 @@ class App extends Component {
   }
   handleStart() {
     if (this.state.started) return;
-    const add_100ms = this.props.add_100ms;
+    const update = this.props.update;
     let intervalID = setInterval(function () {
-      add_100ms();
-    }, 10);
+      update();
+    }, 35);
     this.setState({
       intervalID,
     });
@@ -102,8 +102,8 @@ class App extends Component {
 }
 
 const formatTime = ms => {
-
-  let milliseconds = ms % 1000 / 10;
+  
+  let milliseconds = (ms % 1000 / 10).toFixed();
   let seconds = ((ms / 1000) % 60).toFixed();
   let minutes = ((ms / 1000 / 60) % 60).toFixed();
   let hours = (ms / 1000 / 60 / 60).toString()[0];
@@ -118,6 +118,6 @@ const formatTime = ms => {
 const formatNumber = number => number < 10 ? `0${number}` : number;
 
 const mapStateToProps = (chronometer) => ({ chronometer });
-const mapDispatchToProps = { add_100ms, clear };
+const mapDispatchToProps = { update, clear };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

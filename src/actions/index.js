@@ -1,8 +1,8 @@
-export const ADD_100MS = 'ADD_MS';
+export const UPDATE = 'ADD_MS';
 export const CLEAR = 'CLEAR';
 
-export function add_100ms() {
-  return { type: ADD_100MS };
+export function update() {
+  return { type: UPDATE };
 }
 
 export function clear() {
